@@ -25,109 +25,119 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <title>Registrasi - SPK RS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Registrasi - SPK Rumah Sakit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@600&display=swap"
+        rel="stylesheet">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@500&display=swap');
-
     body {
         background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
         color: #f8f5f0;
         font-family: 'Poppins', sans-serif;
-        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 100vh;
         padding: 2rem;
     }
 
-    .card {
+    .register-box {
         background: rgba(212, 175, 55, 0.1);
-        border: 2px solid #d4af37;
-        border-radius: 16px;
-        padding: 2rem;
-        max-width: 450px;
+        padding: 2.5rem;
+        border-radius: 18px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
         width: 100%;
-        box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+        max-width: 420px;
+        border: 2px solid rgba(212, 175, 55, 0.4);
     }
 
-    .card h2 {
+    .register-box h2 {
         font-family: 'Playfair Display', serif;
-        text-align: center;
         color: #d4af37;
-        margin-bottom: 1.5rem;
+        text-align: center;
+        margin-bottom: 1.8rem;
         font-size: 2rem;
+    }
+
+    .form-label {
+        color: #f8f5f0;
+        font-weight: 600;
     }
 
     .form-control {
         background-color: #1f1f1f;
-        border: 1.5px solid #d4af37;
+        border: 2px solid #d4af37;
         color: #fff;
     }
 
     .form-control:focus {
         background-color: #2a2a2a;
         border-color: #fff;
-        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.4);
+        color: #fff;
     }
 
     .btn-primary {
         background-color: #d4af37;
         border: none;
-        font-weight: 600;
+        font-weight: 700;
+        width: 100%;
     }
 
     .btn-primary:hover {
-        background-color: #b89e30;
-    }
-
-    .btn-link {
-        color: #d4af37;
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    .btn-link:hover {
-        color: #fff;
-        text-decoration: underline;
+        background-color: #a89529;
+        box-shadow: 0 0 10px #a89529;
     }
 
     .alert {
-        font-size: 0.95rem;
-        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .text-center a {
+        color: #d4af37;
+        font-weight: 600;
+    }
+
+    .text-center a:hover {
+        color: #fff;
     }
     </style>
 </head>
 
 <body>
-    <div class="card">
+    <div class="register-box">
         <h2>Registrasi Pengguna</h2>
 
         <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
+        <div class="alert alert-danger"><?= $_SESSION['error'];
+                                            unset($_SESSION['error']); ?></div>
         <?php endif; ?>
         <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success"><?= $_SESSION['success']; unset($_SESSION['success']); ?></div>
+        <div class="alert alert-success"><?= $_SESSION['success'];
+                                                unset($_SESSION['success']); ?></div>
         <?php endif; ?>
 
-        <form method="POST" class="mt-3">
+        <form method="POST">
             <div class="mb-3">
-                <label class="form-label text-white">Nama Lengkap</label>
+                <label class="form-label">Nama Lengkap</label>
                 <input type="text" name="nama" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label class="form-label text-white">Email</label>
+                <label class="form-label">Email</label>
                 <input type="email" name="email" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label class="form-label text-white">Kata Sandi</label>
+                <label class="form-label">Kata Sandi</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
-            <button class="btn btn-primary w-100 mt-2">Daftar</button>
-            <div class="text-center mt-3">
-                <a href="login.php" class="btn-link">Sudah punya akun? Login</a>
-            </div>
+            <button type="submit" class="btn btn-primary">Daftar</button>
         </form>
+
+        <div class="text-center mt-3">
+            <span>Sudah punya akun? <a href="login.php">Login</a></span>
+        </div>
     </div>
 </body>
 
