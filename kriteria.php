@@ -1,4 +1,10 @@
 <?php
+// Di setiap halaman sistem
+session_start();
+if (!isset($_SESSION['user_id'])) {
+header("Location: login.php");
+exit();
+}
 include 'koneksi.php';
 
 // Tambah kriteria
