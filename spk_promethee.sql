@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Bulan Mei 2025 pada 01.27
+-- Waktu pembuatan: 29 Jul 2025 pada 08.03
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -37,10 +37,10 @@ CREATE TABLE `alternatif` (
 --
 
 INSERT INTO `alternatif` (`id`, `nama`) VALUES
-(1, 'Vendor A'),
-(2, 'Vendor B'),
-(3, 'Vendor C'),
-(4, 'Vendor D');
+(1, 'Rumah Sakit Margono'),
+(2, 'Rumah Sakit DKT'),
+(3, 'Rumah Sakit JIH'),
+(4, 'Rumah Sakit Ananda');
 
 -- --------------------------------------------------------
 
@@ -60,10 +60,11 @@ CREATE TABLE `kriteria` (
 --
 
 INSERT INTO `kriteria` (`id`, `nama`, `bobot`, `tipe`) VALUES
-(1, 'Harga(juta)', 0.4, 'minimize'),
-(2, 'Kualitas(ratting)', 0.3, 'maximize'),
-(3, 'Layanan(ratting)', 0.3, 'maximize'),
-(4, 'pengerjaan(hari)', 0.2, 'minimize');
+(1, 'Kualitas Pelayanan (Ratting)', 0.3, 'maximize'),
+(2, 'Fasilitas Medis (Ratting)', 0.25, 'maximize'),
+(3, 'Biaya Rata_Rata (Juta)', 0.2, 'minimize'),
+(4, 'Jumlah Dokter Spesialis', 0.15, 'maximize'),
+(5, 'Ketersediaan Tempat Tidur', 0.1, 'maximize');
 
 -- --------------------------------------------------------
 
@@ -83,22 +84,48 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`id`, `id_alternatif`, `id_kriteria`, `nilai`) VALUES
-(142, 1, 1, 8),
-(143, 1, 2, 10),
-(144, 1, 3, 10),
-(145, 1, 4, 5),
-(146, 2, 1, 5),
-(147, 2, 2, 10),
-(148, 2, 3, 7),
-(149, 2, 4, 5),
-(150, 3, 1, 6),
-(151, 3, 2, 4),
-(152, 3, 3, 5),
-(153, 3, 4, 2),
-(154, 4, 1, 1),
-(155, 4, 2, 10),
-(156, 4, 3, 10),
-(157, 4, 4, 1);
+(576, 1, 1, 8),
+(577, 1, 2, 8.5),
+(578, 1, 3, 7),
+(579, 1, 4, 9),
+(580, 1, 5, 10),
+(581, 2, 1, 7),
+(582, 2, 2, 7.5),
+(583, 2, 3, 7),
+(584, 2, 4, 6),
+(585, 2, 5, 8),
+(586, 3, 1, 9),
+(587, 3, 2, 9),
+(588, 3, 3, 9),
+(589, 3, 4, 7.8),
+(590, 3, 5, 9),
+(591, 4, 1, 8),
+(592, 4, 2, 7.5),
+(593, 4, 3, 7),
+(594, 4, 4, 8),
+(595, 4, 5, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `nama_lengkap` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `nama_lengkap`, `email`, `password`, `created_at`) VALUES
+(1, 'Toat Tuloh', 'toatalaziz18@gmail.com', '$2y$10$jDkXJdpywyJIb0MpKKuRUek3gJrWjtlxr9xb5A8k6B0UcqV2JmBom', '2025-07-29 04:21:38'),
+(2, 'iwan', 'toattulloh18@gmail.com', '$2y$10$Lg8uaQE1nSuLQknEKOhrbu00MkN8ANP4o4WNaar1mX8cdGcbklUtC', '2025-07-29 05:59:31');
 
 --
 -- Indexes for dumped tables
@@ -125,6 +152,13 @@ ALTER TABLE `nilai`
   ADD KEY `id_kriteria` (`id_kriteria`);
 
 --
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -138,13 +172,19 @@ ALTER TABLE `alternatif`
 -- AUTO_INCREMENT untuk tabel `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=596;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
